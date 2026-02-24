@@ -1,0 +1,12 @@
+{
+  "name": "grudge-factions-site",
+  "version": "1.0.0",
+  "description": "Grudge Factions Minecraft server landing page & modpack distribution",
+  "scripts": {
+    "export": "node scripts/export-modpack.js",
+    "dev": "npx serve public -l 3000"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1"
+  }
+}

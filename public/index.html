@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grudge Factions - Minecraft Server</title>
+  <meta name="description" content="Join Grudge Factions - a souls-like MMO Minecraft experience. Download the modpack and enter the battle.">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Particles background -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-content">
+      <div class="logo-glow"></div>
+      <h1 class="title">GRUDGE<span class="accent">FACTIONS</span></h1>
+      <p class="tagline">A Souls-Like MMO Minecraft Experience</p>
+
+      <div class="server-status" id="serverStatus">
+        <span class="status-dot"></span>
+        <span class="status-text">Checking server...</span>
+      </div>
+
+      <a href="/downloads/GrudgeFactions.zip" class="btn btn-primary" id="downloadBtn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        DOWNLOAD MODPACK
+      </a>
+      <p class="version-info">Minecraft 1.20.1 &middot; Forge &middot; 139 Mods</p>
+    </div>
+
+    <div class="scroll-hint">
+      <span>How to Join</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </div>
+  </header>
+
+  <!-- Server IP Section -->
+  <section class="section server-ip-section">
+    <h2>Server Address</h2>
+    <div class="ip-box" id="ipBox" onclick="copyIP()">
+      <code id="serverIP">26.228.21.150:25565</code>
+      <span class="copy-hint" id="copyHint">Click to copy</span>
+    </div>
+    <div class="player-count" id="playerCount"></div>
+  </section>
+
+  <!-- Setup Steps -->
+  <section class="section steps-section">
+    <h2>How to Join</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>Install CurseForge</h3>
+          <p>Download the <a href="https://www.curseforge.com/download/app" target="_blank" rel="noopener">CurseForge App</a> if you don't have it already.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>Download the Modpack</h3>
+          <p>Click the download button above to get the <strong>Grudge Factions</strong> modpack zip file.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>Import into CurseForge</h3>
+          <p>Open CurseForge &rarr; Minecraft &rarr; <strong>Create Custom Profile</strong> &rarr; <strong>Import</strong> &rarr; Select the downloaded zip.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h3>Launch &amp; Connect</h3>
+          <p>Hit <strong>Play</strong> in CurseForge. Once Minecraft loads, the server is already in your server list. Click <strong>Join Server</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="section features-section">
+    <h2>What Awaits You</h2>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">&#9876;</div>
+        <h3>Souls-Like Combat</h3>
+        <p>Challenging combat with parries, dodges, and skill-based mechanics across 4 unique classes.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">&#127984;</div>
+        <h3>Faction Wars</h3>
+        <p>Choose your faction, build alliances, and battle for dominance across interconnected islands.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">&#129704;</div>
+        <h3>AI Companions</h3>
+        <p>Deploy Gouldstone allies, command crews, and interact with dynamic AI-driven faction systems.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">&#9881;</div>
+        <h3>Deep Crafting</h3>
+        <p>17 weapon types, 6 shield types, professions, and gear crafting to build your perfect loadout.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2026 Grudge Factions &middot; Not affiliated with Mojang Studios</p>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
+</html>
