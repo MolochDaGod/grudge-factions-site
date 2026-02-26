@@ -24,7 +24,6 @@ async function checkServerStatus() {
   const playerCount = document.getElementById('playerCount');
 
   try {
-    // Use mcsrvstat.us public API for Minecraft server status
     const res = await fetch(`https://api.mcsrvstat.us/3/${SERVER_IP}:${SERVER_PORT}`);
     const data = await res.json();
 
@@ -48,6 +47,21 @@ async function checkServerStatus() {
   }
 }
 
+// === MOD LIST ===
+async function loadModList() {
+  const container = document.getElementById('modListContainer');
+  if (!container) return;
+  try {
+    const res = await fetch('/modlist.json');
+    const data = await res.json();
+    container.innerHTML = data.mods.map(m =>
+      `<span style="background:#1e1e2e;border:1px solid #333;padding:3px 10px;border-radius:12px;font-size:0.75rem;color:#ccc;white-space:nowrap;">${m.name}</span>`
+    ).join('');
+  } catch {
+    container.textContent = 'Could not load mod list.';
+  }
+}
+
 // === PARTICLES ===
 function createParticles() {
   const container = document.getElementById('particles');
@@ -68,6 +82,6 @@ function createParticles() {
 document.addEventListener('DOMContentLoaded', () => {
   createParticles();
   checkServerStatus();
-  // Refresh status every 60 seconds
+  loadModList();
   setInterval(checkServerStatus, 60000);
 });

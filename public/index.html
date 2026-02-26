@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grudge Factions - Minecraft Server</title>
-  <meta name="description" content="Join Grudge Factions - a souls-like MMO Minecraft experience. Download the modpack and enter the battle.">
+  <meta name="description" content="Join Grudge Factions - a souls-like MMO Minecraft experience with 4 classes, faction wars, and AI companions. Download the modpack and enter the battle.">
   <link rel="stylesheet" href="/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
         <span class="status-text">Checking server...</span>
       </div>
 
-      <a href="https://github.com/MolochDaGod/grudge-factions-site/releases/download/v1.0.0/GrudgeFactions.zip" class="btn btn-primary" id="downloadBtn">
+      <a href="https://github.com/MolochDaGod/grudge-factions-site/releases/latest/download/GrudgeFactions.zip" class="btn btn-primary" id="downloadBtn">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
           <polyline points="7 10 12 15 17 10"/>
@@ -33,7 +33,7 @@
         </svg>
         DOWNLOAD MODPACK
       </a>
-      <p class="version-info">Minecraft 1.20.1 &middot; Forge &middot; 139 Mods</p>
+      <p class="version-info">Minecraft 1.20.1 &middot; Forge 47.4.0 &middot; 120 Mods &middot; v1.1.0</p>
     </div>
 
     <div class="scroll-hint">
@@ -54,6 +54,70 @@
     <div class="player-count" id="playerCount"></div>
   </section>
 
+  <!-- Classes Section -->
+  <section class="section classes-section">
+    <h2>Choose Your Class</h2>
+    <p style="text-align:center;color:#aaa;margin-bottom:1.5rem;">Type <code style="background:#2a2a3e;padding:2px 8px;border-radius:4px;color:#f59e0b;">/classstart</code> in-game to pick your class and get your full starter loadout.</p>
+    <div class="classes">
+      <div class="class-card warrior">
+        <div class="class-icon">&#9876;</div>
+        <h3 style="color:#ef4444;">Warrior</h3>
+        <div class="class-resource">Resource: <span style="color:#ef4444;">Rage</span></div>
+        <p class="class-desc">Heavy plate armor, swords, shields, greatswords. Frontline tank and damage dealer.</p>
+        <div class="class-details">
+          <div class="detail-label">Weapons</div>
+          <div class="detail-value">Sword+Shield, Greatsword, Greataxe, Longsword, Mace, Spear</div>
+          <div class="detail-label">Skills (R/Z/C/V)</div>
+          <div class="detail-value">Battle Cry &middot; Shield Bash &middot; War Cry &middot; Crushing Blow</div>
+          <div class="detail-label">Passives</div>
+          <div class="detail-value">Plate Mastery &middot; Shield Wall &middot; Battle Rage &middot; +24 HP</div>
+        </div>
+      </div>
+      <div class="class-card ranger">
+        <div class="class-icon">&#127993;</div>
+        <h3 style="color:#22c55e;">Ranger</h3>
+        <div class="class-resource">Resource: <span style="color:#38bdf8;">Focus</span></div>
+        <p class="class-desc">Light leather armor, bows, crossbows, guns, daggers. Ranged DPS and stealth.</p>
+        <div class="class-details">
+          <div class="detail-label">Weapons</div>
+          <div class="detail-value">Bow, Crossbow, Gun, Dagger, Spear, Longsword, Twinblade</div>
+          <div class="detail-label">Skills (R/Z/C/V)</div>
+          <div class="detail-value">Vanish &middot; Rapid Fire &middot; Jump Shot &middot; Power Shot</div>
+          <div class="detail-label">Passives</div>
+          <div class="detail-value">Eagle Eye &middot; Fleet Footed &middot; Spirit Quiver &middot; +10% Speed</div>
+        </div>
+      </div>
+      <div class="class-card mage">
+        <div class="class-icon">&#10022;</div>
+        <h3 style="color:#38bdf8;">Mage</h3>
+        <div class="class-resource">Resource: <span style="color:#6366f1;">Mana</span></div>
+        <p class="class-desc">Cloth robes, staffs, wands, tomes. Elemental spellcaster across 5 magic schools.</p>
+        <div class="class-details">
+          <div class="detail-label">Weapons</div>
+          <div class="detail-value">Fire/Frost/Arcane Staves, Wands, Tomes, Maces</div>
+          <div class="detail-label">Skills (R/Z/C/V)</div>
+          <div class="detail-value">Arcane Ward &middot; Frost Nova &middot; Blink &middot; Arcane Barrage</div>
+          <div class="detail-label">Spellbook</div>
+          <div class="detail-value">Fireball, Frostbolt, Meteor, Blizzard, Blink &amp; more via /mage</div>
+        </div>
+      </div>
+      <div class="class-card worge">
+        <div class="class-icon">&#128058;</div>
+        <h3 style="color:#f59e0b;">Worge</h3>
+        <div class="class-resource">Resource: <span style="color:#f59e0b;">Spirit</span></div>
+        <p class="class-desc">Shapeshifter with 14 animal forms + 3 legendary. Nature magic and feral combat.</p>
+        <div class="class-details">
+          <div class="detail-label">Weapons</div>
+          <div class="detail-value">Nature Staves, Spear, Dagger, Bow, Greathammer, Mace</div>
+          <div class="detail-label">Skills (R/Z/C/V)</div>
+          <div class="detail-value">Form Shift &middot; Bestial Roar &middot; Pounce &middot; Primal Fury</div>
+          <div class="detail-label">Forms</div>
+          <div class="detail-value">Bear (Tank) &middot; Raptor (Stealth) &middot; Bird (Flight) + 14 more</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Setup Steps -->
   <section class="section steps-section">
     <h2>How to Join</h2>
@@ -69,7 +133,7 @@
         <div class="step-number">2</div>
         <div class="step-content">
           <h3>Download the Modpack</h3>
-          <p>Click the download button above to get the <strong>Grudge Factions</strong> modpack zip file.</p>
+          <p>Click the download button above to get the <strong>Grudge Factions</strong> modpack zip (120 mods, Forge 47.4.0).</p>
         </div>
       </div>
       <div class="step">
@@ -83,7 +147,7 @@
         <div class="step-number">4</div>
         <div class="step-content">
           <h3>Launch &amp; Connect</h3>
-          <p>Hit <strong>Play</strong> in CurseForge. Once Minecraft loads, the server is already in your server list. Click <strong>Join Server</strong>.</p>
+          <p>Hit <strong>Play</strong> in CurseForge. The server is pre-added to your server list. Click <strong>Join Server</strong>, then type <code>/classstart</code> to pick your class!</p>
         </div>
       </div>
     </div>
@@ -96,24 +160,31 @@
       <div class="feature">
         <div class="feature-icon">&#9876;</div>
         <h3>Souls-Like Combat</h3>
-        <p>Challenging combat with parries, dodges, and skill-based mechanics across 4 unique classes.</p>
+        <p>Challenging combat with parries, dodges, and weapon mastery across 17 weapon types and 4 unique classes.</p>
       </div>
       <div class="feature">
         <div class="feature-icon">&#127984;</div>
         <h3>Faction Wars</h3>
-        <p>Choose your faction, build alliances, and battle for dominance across interconnected islands.</p>
+        <p>3 factions (Crusade, Fabled, Legion), 6 races, crew systems, and zone capture across interconnected islands.</p>
       </div>
       <div class="feature">
         <div class="feature-icon">&#129704;</div>
         <h3>AI Companions</h3>
-        <p>Deploy Gouldstone allies, command crews, and interact with dynamic AI-driven faction systems.</p>
+        <p>Deploy Gouldstone allies, command crews of 3-5 members, and interact with dynamic AI-driven faction NPCs.</p>
       </div>
       <div class="feature">
         <div class="feature-icon">&#9881;</div>
-        <h3>Deep Crafting</h3>
-        <p>17 weapon types, 6 shield types, professions, and gear crafting to build your perfect loadout.</p>
+        <h3>Deep Progression</h3>
+        <p>11 professions, passive skill trees, weapon mastery, spell schools, and crafting from T1 to T8 gear.</p>
       </div>
     </div>
+  </section>
+
+  <!-- Mod List Section -->
+  <section class="section modlist-section">
+    <h2>Mod List</h2>
+    <p style="text-align:center;color:#aaa;margin-bottom:1rem;">120 mods &middot; Minecraft 1.20.1 &middot; Forge 47.4.0 &middot; Updated Feb 2026</p>
+    <div id="modListContainer" style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:900px;margin:0 auto;"></div>
   </section>
 
   <!-- Footer -->
