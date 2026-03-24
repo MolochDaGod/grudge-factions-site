@@ -1,7 +1,7 @@
 {
-  "name": "grudge-factions-site",
-  "version": "1.0.0",
-  "description": "Grudge Factions Minecraft server landing page & modpack distribution",
+  "name": "grudge-studios-lobby",
+  "version": "2.0.0",
+  "description": "Grudge Studios Server Lobby — central hub for all Grudge games and services",
   "scripts": {
     "export": "node scripts/export-modpack.js",
     "dev": "npx serve public -l 3000"
