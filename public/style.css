@@ -305,32 +305,12 @@ code { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
 .game-btn.secondary:hover { border-color: var(--card-accent, var(--gold)); color: var(--text); }
 
 /* Card accent overrides */
-.game-card[data-game="factions"]    { --card-accent: #33aa55; }
 .game-card[data-game="warlords"]    { --card-accent: #d4af37; }
+.game-card[data-game="builder"]     { --card-accent: #33aa55; }
 .game-card[data-game="dungeon"]     { --card-accent: #cc3333; }
 .game-card[data-game="crafting"]    { --card-accent: #8855cc; }
 .game-card[data-game="armada"]      { --card-accent: #3388cc; }
 .game-card[data-game="gdevelop"]    { --card-accent: #f59e0b; }
-
-/* === MC SERVER IP INLINE === */
-.mc-ip-row {
-  display: flex; align-items: center; gap: 8px;
-  margin-bottom: 0.75rem;
-}
-.mc-ip-box {
-  display: flex; align-items: center; gap: 6px;
-  padding: 6px 14px;
-  background: var(--bg-dark);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-size: 0.8rem;
-}
-.mc-ip-box:hover { border-color: var(--green); }
-.mc-ip-box.copied { border-color: var(--green); }
-.mc-ip-box code { color: #fff; font-size: 0.8rem; }
-.mc-ip-box .copy-icon { color: var(--text-muted); font-size: 0.7rem; }
 
 /* === AUTH OVERLAY === */
 .auth-overlay {

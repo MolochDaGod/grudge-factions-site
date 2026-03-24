@@ -2,36 +2,36 @@
 // GRUDGE STUDIOS — Server Lobby Script
 // ═══════════════════════════════════════════════════════════════
 
-const MC_IP = '26.228.21.150';
-const MC_PORT = 25565;
+const BACKEND_URL = 'https://api.grudge-studio.com';
+const WARLORDS_URL = 'https://grudgewarlords.com';
 
 // ── Game server definitions ────────────────────────────────────
 const GAMES = [
   {
-    id: 'factions',
-    name: 'Grudge Factions',
-    icon: '&#9876;',
-    platform: 'Minecraft 1.20.1',
-    desc: 'Souls-like MMO Minecraft with 4 classes, faction wars, AI companions, 17 weapon types, and 120 mods. Parry, dodge, conquer.',
-    tags: ['Souls-Like', 'MMO', 'PvP', 'Factions', '120 Mods'],
-    type: 'minecraft',
-    primaryLabel: 'Download Modpack',
-    primaryUrl: 'https://github.com/MolochDaGod/grudge-factions-site/releases/latest/download/GrudgeFactions.zip',
-    secondaryLabel: 'Copy IP',
-    serverIp: `${MC_IP}:${MC_PORT}`,
-  },
-  {
     id: 'warlords',
     name: 'Grudge Warlords',
-    icon: '&#128081;',
-    platform: 'Browser RPG',
-    desc: 'Full character builder, skill trees, gear progression, and combat across islands. Shared characters with all Grudge games.',
-    tags: ['RPG', 'Character Builder', 'Skill Trees', 'Gear'],
-    type: 'browser',
+    icon: '&#9876;',
+    platform: 'Open World MMO',
+    desc: 'Souls-like browser MMO with 4 classes, 6 races, faction wars, 17 weapon types, island conquest, crew PvP, and AI companions. The flagship Grudge experience.',
+    tags: ['Souls-Like', 'MMO', 'Open World', 'PvP', 'Factions', 'Crafting'],
+    type: 'server',
     primaryLabel: 'Play Now',
-    primaryUrl: 'https://grudgewarlords.com',
-    secondaryLabel: 'Info',
-    secondaryUrl: 'https://grudgewarlords.com',
+    primaryUrl: WARLORDS_URL,
+    secondaryLabel: 'Weapon Atlas',
+    secondaryUrl: WARLORDS_URL + '/weapon-skill-tree.html',
+  },
+  {
+    id: 'builder',
+    name: 'Grudge Builder',
+    icon: '&#128100;',
+    platform: 'Character Hub',
+    desc: 'Create and manage characters, assign gear, build skill trees, manage your island and roster. Shared across all Grudge games.',
+    tags: ['Character Creator', 'Islands', 'Roster', 'Skills'],
+    type: 'browser',
+    primaryLabel: 'Open Builder',
+    primaryUrl: 'https://grudge-builder.vercel.app',
+    secondaryLabel: 'Compendium',
+    secondaryUrl: WARLORDS_URL + '/character',
   },
   {
     id: 'dungeon',
@@ -51,7 +51,7 @@ const GAMES = [
     name: 'Warlord Crafting Suite',
     icon: '&#128296;',
     platform: 'Browser · Tools',
-    desc: 'Crafting calculator, profession trees, item database, and gear planning for all Grudge Warlords content.',
+    desc: 'Crafting calculator, profession trees, item database with 3,400+ items, and gear planning for all Grudge Warlords content.',
     tags: ['Crafting', 'Professions', 'Items', 'Planner'],
     type: 'browser',
     primaryLabel: 'Open Tools',
@@ -91,27 +91,15 @@ function renderGameGrid() {
   if (!grid) return;
 
   grid.innerHTML = GAMES.map(g => {
-    const statusClass = g.type === 'minecraft' ? '' : 'browser';
-    const statusText = g.type === 'minecraft' ? 'Checking...' : 'Browser — Always On';
-    const statusId = g.type === 'minecraft' ? 'id="mcStatus"' : '';
-
-    let extra = '';
-    if (g.serverIp) {
-      extra = `
-        <div class="mc-ip-row">
-          <div class="mc-ip-box" id="mcIpBox" onclick="copyMcIp()">
-            <code>${g.serverIp}</code>
-            <span class="copy-icon">⎘</span>
-          </div>
-        </div>`;
-    }
+    const isServer = g.type === 'server';
+    const statusClass = isServer ? '' : 'browser';
+    const statusText = isServer ? 'Checking server...' : 'Browser — Always On';
+    const statusId = isServer ? 'id="serverStatus"' : '';
 
     const tags = (g.tags || []).map(t => `<span class="game-tag">${t}</span>`).join('');
 
     let actions = `<a href="${g.primaryUrl}" target="_blank" rel="noopener" class="game-btn primary">${g.primaryLabel}</a>`;
-    if (g.secondaryLabel && g.serverIp) {
-      actions += `<button class="game-btn secondary" onclick="copyMcIp()">${g.secondaryLabel}</button>`;
-    } else if (g.secondaryLabel && g.secondaryUrl) {
+    if (g.secondaryLabel && g.secondaryUrl) {
       actions += `<a href="${g.secondaryUrl}" target="_blank" rel="noopener" class="game-btn secondary">${g.secondaryLabel}</a>`;
     }
 
@@ -128,7 +116,6 @@ function renderGameGrid() {
           <span class="status-dot ${statusClass}"></span>
           <span class="status-text">${statusText}</span>
         </div>
-        ${extra}
         <div class="game-card-desc">${g.desc}</div>
         <div class="game-card-tags">${tags}</div>
         <div class="game-card-actions">${actions}</div>
@@ -136,44 +123,42 @@ function renderGameGrid() {
   }).join('');
 }
 
-// ── MC server status ───────────────────────────────────────────
-async function checkMcStatus() {
-  const el = document.getElementById('mcStatus');
+// ── Server status (Grudge backend + Warlords) ──────────────────
+async function checkServerStatus() {
+  const el = document.getElementById('serverStatus');
   if (!el) return;
   const dot = el.querySelector('.status-dot');
   const text = el.querySelector('.status-text');
-  const heroPlayers = document.getElementById('mcPlayers');
+  const heroPlayers = document.getElementById('heroPlayers');
 
   try {
-    const res = await fetch(`https://api.mcsrvstat.us/3/${MC_IP}:${MC_PORT}`);
-    const data = await res.json();
+    // Check Warlords API health + stats in parallel
+    const [healthRes, statsRes] = await Promise.allSettled([
+      fetch(WARLORDS_URL + '/api/health'),
+      fetch(WARLORDS_URL + '/api/public/stats'),
+    ]);
 
-    if (data.online) {
+    const healthOk = healthRes.status === 'fulfilled' && healthRes.value.ok;
+
+    if (healthOk) {
       dot.className = 'status-dot online';
-      const p = data.players || {};
-      text.textContent = `Online — ${p.online || 0}/${p.max || '?'} players`;
-      if (heroPlayers) heroPlayers.textContent = p.online || 0;
+      // Try to get player count from stats
+      let playerText = 'Online';
+      if (statsRes.status === 'fulfilled' && statsRes.value.ok) {
+        const stats = await statsRes.value.json();
+        const total = stats.totalPlayers || stats.players || stats.accounts || 0;
+        if (total > 0) playerText = `Online — ${total} players registered`;
+        if (heroPlayers) heroPlayers.textContent = total;
+      }
+      text.textContent = playerText;
     } else {
       dot.className = 'status-dot offline';
-      text.textContent = 'Offline';
-      if (heroPlayers) heroPlayers.textContent = '0';
+      text.textContent = 'Server Maintenance';
     }
   } catch {
     dot.className = 'status-dot offline';
     text.textContent = 'Status unavailable';
   }
-}
-
-// ── Copy MC IP ─────────────────────────────────────────────────
-function copyMcIp() {
-  const ip = `${MC_IP}:${MC_PORT}`;
-  navigator.clipboard.writeText(ip).then(() => {
-    const box = document.getElementById('mcIpBox');
-    if (box) {
-      box.classList.add('copied');
-      setTimeout(() => box.classList.remove('copied'), 2000);
-    }
-  });
 }
 
 // ── Auth UI ────────────────────────────────────────────────────
@@ -187,11 +172,10 @@ function hideAuthModal() {
 async function authGrudgeLogin() {
   hideAuthModal();
   try {
-    // Redirect to Grudge auth gateway
     if (typeof Grudge !== 'undefined') {
       Grudge.auth.oauth('discord');
     } else {
-      window.location.href = 'https://id.grudge-studio.com/auth/login?redirect_uri=' + encodeURIComponent(window.location.href);
+      window.location.href = BACKEND_URL + '/auth/login?redirect_uri=' + encodeURIComponent(window.location.href);
     }
   } catch (e) {
     console.error('Auth error:', e);
@@ -203,7 +187,7 @@ async function authDiscord() {
   if (typeof Grudge !== 'undefined') {
     Grudge.auth.discord();
   } else {
-    window.location.href = 'https://id.grudge-studio.com/auth/discord?redirect_uri=' + encodeURIComponent(window.location.href);
+    window.location.href = BACKEND_URL + '/auth/discord?redirect_uri=' + encodeURIComponent(window.location.href);
   }
 }
 
@@ -267,8 +251,8 @@ function createParticles() {
 document.addEventListener('DOMContentLoaded', async () => {
   createParticles();
   renderGameGrid();
-  checkMcStatus();
-  setInterval(checkMcStatus, 60000);
+  checkServerStatus();
+  setInterval(checkServerStatus, 60000);
 
   // Try auto-login via Grudge SDK
   if (typeof Grudge !== 'undefined') {
