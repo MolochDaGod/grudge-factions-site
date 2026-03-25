@@ -103,8 +103,12 @@ function renderGameGrid() {
       actions += `<a href="${g.secondaryUrl}" target="_blank" rel="noopener" class="game-btn secondary">${g.secondaryLabel}</a>`;
     }
 
+    const flagshipClass = isServer ? ' flagship' : '';
+    const flagshipBadge = isServer ? '<span class="flagship-badge">Flagship</span>' : '';
+
     return `
-      <div class="game-card" data-game="${g.id}">
+      <div class="game-card${flagshipClass}" data-game="${g.id}">
+        ${flagshipBadge}
         <div class="game-card-header">
           <div class="game-icon">${g.icon}</div>
           <div>
@@ -259,4 +263,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     try { await Grudge.auth.init(); } catch {}
     updateAuthUI();
   }
+
+  // Close auth modal on ESC
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') hideAuthModal();
+  });
 });

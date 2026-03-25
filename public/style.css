@@ -23,6 +23,7 @@
 
 /* === BASE === */
 * { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
   font-family: 'Roboto', -apple-system, sans-serif;
   background: var(--bg-dark);
@@ -303,6 +304,23 @@ code { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
   border: 1px solid var(--border);
 }
 .game-btn.secondary:hover { border-color: var(--card-accent, var(--gold)); color: var(--text); }
+
+/* Flagship card */
+.game-card.flagship {
+  grid-column: 1 / -1;
+  border-color: var(--gold-dim);
+  background: linear-gradient(135deg, var(--bg-panel) 0%, rgba(212, 175, 55, 0.06) 100%);
+}
+.game-card.flagship::before { opacity: 1; height: 3px; }
+.flagship-badge {
+  position: absolute; top: 12px; right: 12px;
+  padding: 3px 10px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+  color: #000; font-size: 0.6rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  border-radius: 4px;
+}
+.flagship .game-card-desc { max-width: 700px; }
 
 /* Card accent overrides */
 .game-card[data-game="warlords"]    { --card-accent: #d4af37; }

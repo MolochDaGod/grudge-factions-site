@@ -8,9 +8,9 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <title>Grudge Studios — Server Lobby</title>
-  <meta name="description" content="Grudge Studios Server Lobby — Choose your battlefield. Souls-like MMO Minecraft, browser RPG, dungeon crawlers, crafting, and more.">
+  <meta name="description" content="Grudge Studios Server Lobby — Choose your battlefield. Souls-like open world MMO, browser RPG, dungeon crawlers, crafting, and more.">
   <meta property="og:title" content="Grudge Studios — Server Lobby">
-  <meta property="og:description" content="Central hub for all Grudge Studio games. Join Grudge Factions, Grudge Warlords, Dungeon Crawler Quest, and more.">
+  <meta property="og:description" content="Central hub for all Grudge Studio games. Play Grudge Warlords, Dungeon Crawler Quest, Grim Armada, and more.">
   <meta property="og:type" content="website">
   <link rel="stylesheet" href="/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,7 +30,7 @@
   </nav>
 
   <!-- Auth Modal -->
-  <div class="auth-overlay hidden" id="authOverlay">
+  <div class="auth-overlay hidden" id="authOverlay" onclick="if(event.target===this)hideAuthModal()">
     <div class="auth-modal">
       <button class="auth-close" onclick="hideAuthModal()">&times;</button>
       <h2>Enter the Arena</h2>
